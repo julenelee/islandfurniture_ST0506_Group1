@@ -1,0 +1,215 @@
+<script src="../../checkCountry.js"></script>
+<html>
+<script src="../../../header.js"></script>
+
+<style>
+    .popup-box {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .popup-content {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        position: relative;
+
+    }
+
+    .popup-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #333;
+        background: transparent;
+        border: none;
+    }
+
+    .popup-content img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+    }
+
+    .popup-content ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .popup-content ul li {
+        margin: 10px 0;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .container-fluid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    img {
+        max-width: none;
+        width: auto;
+        height: auto;
+    }
+</style>
+
+<body>
+    <script>
+        // ju : bedroom used furnitures
+        // 1. VITTSJO (dressing table)
+        // 2. NORRASEN (shelf)
+        // 3. EKENAS (arm chair)
+        // 4. RISET (table lamp)
+        // 5. HEMNES (bed)
+        // 6. BOSNAS (sofa)
+
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     var bedroomMapTxt = '<map name="bedroomMap">'
+        //         + '<area  alt="" title="dressing table" shape="rect" coords="360,270,350,400    " style="outline:none; cursor: pointer" onclick="showPopup(\'VITTSJO\')\" target="_self" />'
+        //         + '<area  alt="" title="shelf" shape="rect" coords="560, 450, 585, 410" style="outline:none; cursor: pointer" onclick="showPopup(\'NORRASEN\')\" target="_self" />'
+        //         + '<area  alt="" title="arm chair" shape="rect" coords="0,335,210,540" style="outline:none; cursor: pointer" onclick="showPopup(\'EKENAS\')\" target="_self" />'
+        //         + '<area  alt="" title="table lamp" shape="rect" coords="360, 190, 435, 230" style="outline:none; cursor: pointer" onclick="showPopup(\'RISET\')\" target="_self" />'
+        //         + '<area  alt="" title="bed" shape="rect" coords="295, 550, 380, 450" style="outline:none; cursor: pointer" onclick="showPopup(\'HEMNES\')\" target="_self" />'
+        //         + '<area shape="rect" coords="1048,766,1050,768" alt="Image Map" style="outline:none;" title="Image Map" href="http://www.image-maps.com/index.php?aff=mapped_users_0" />'
+        //         + '</map>'
+        //     document.getElementById('mapOfBedroom').innerHTML = bedroomMapTxt;
+        // }, false);
+
+
+        // ju : handling popup box
+        function showPopup(name) {
+
+            // ju : step 1 - fetch info from the db
+            var countryId = localStorage.getItem('countryId');
+            console.log(`/api/getFurnitureByName?name=${name}&countryId=${countryId}`);
+
+            fetch(new Request('http://localhost:8081/api/getFurnitureByName?name=' + name + '&countryId=' + countryId,
+                {
+                    method: 'GET'
+                })).then(function (response) {
+                    return response.json();
+                }).then(function (data) {
+
+                    // ju : no need loop cuz getting one item only 
+                    var furniture = data[0];
+
+                    // ju : step 2 - put data into the html
+                    document.getElementById('popupTitle').innerHTML = furniture.name;
+                    document.getElementById("popupImage").src = furniture.imageURL;
+                    document.getElementById("popupHeight").innerHTML = furniture.height;
+                    document.getElementById("popupLength").innerHTML = furniture.length;
+                    document.getElementById("popupWidth").innerHTML = furniture.width;
+                    document.getElementById("popupPrice").innerHTML = furniture.price;
+
+                    document.getElementById("popupBox").style.display = "flex";
+
+                }).catch(function (error) {
+                    console.log(error);
+                });
+        }
+
+        function closePopup() {
+            document.getElementById('popupBox').style.display = 'none';
+        }
+    </script>
+    <script src="../menu2.js"></script>
+    <div role="main" class="main">
+        <section class="page-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Bed Room Showroom</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="container-fluid">
+            <div class="row featured-box login">
+                <!-- Virtual Store Map -->
+                <div class="col-md-12">
+                    <div class="featured-box featured-box-secondary default info-content">
+                        <div class="box-content">
+                            <h4>Bed Room</h4>
+                            <div style="position: relative;">
+                                <!-- Image -->
+                                <img src="../../../img/showroom-bedroom.jpg" alt="Bedroom" style="width: 100%;" />
+
+                                <!-- Dressing Table -->
+                                <div style="position: absolute; top: 47.1%; left: 67.7%; width: 10%; height: 2%; cursor: pointer;"
+                                    onclick="showPopup('VITTSJO')">
+                                </div>
+
+                                <!-- Shelf -->
+                                <div style="position: absolute; top: 32.3%; left: 33.5%; width: 5.8%; height: 13.4%; cursor: pointer;"
+                                    onclick="showPopup('NORRASEN')">
+                                </div>
+                                <!-- Arm Chair -->
+                                <div style="position: absolute; top: 57.62%; left: 0%; width: 19.37%; height: 31.25%; cursor: pointer;"
+                                    onclick="showPopup('EKENAS')">
+                                </div>
+
+                                <!-- Table Lamp -->
+                                <div style="position: absolute; top: 45.7%; left: 35.7%; width: 4.5%; height: 5.8%; cursor: pointer;"
+                                    onclick="showPopup('RISET')">
+                                </div>
+                                <!-- Bed -->
+                                <div style="position: absolute; top: 47.2%; left: 42.4%; width: 21.6%; height: 22.6%; cursor: pointer;"
+                                    onclick="showPopup('HEMNES')">
+                                </div>
+
+                                <div style="position: absolute; top: 55.9%; left: 12.5%; width: 18.8%; height: 6.7%; cursor: pointer;"
+                                    onclick="showPopup('BOSNAS')">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ju : Popup Box HTML -->
+    <div id="popupBox" class="popup-box" style="display: none">
+        <div class="popup-content">
+            <span class="popup-close" onclick="closePopup()">&times;</span>
+            <h3 id="popupTitle">Product Details</h3>
+            <img id="popupImage" src="" alt="Popup Image" />
+            <ul id="popupDetails">
+                <li><strong>Height:</strong> <span id="popupHeight"></span></li>
+                <li><strong>Length:</strong> <span id="popupLength"></span></li>
+                <li><strong>Width:</strong> <span id="popupWidth"></span></li>
+                <li><strong>Price: $</strong> <span id="popupPrice"></span></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <script src="../../footer.js"></script>
+
+</body>
+
+</html>

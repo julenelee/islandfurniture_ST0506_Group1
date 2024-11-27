@@ -31,7 +31,7 @@ document.write('\
     <div class="container">\
         <h1 class="logo">\
             <a href="/B/' + countryPrefix + '/index.html">\
-                <img alt="Island Furniture" width="180" height="80" data-sticky-width="82" data-sticky-height="40" src="../img/logo.png">\
+                <img alt="Island Furniture" width="180" height="80" data-sticky-width="82" data-sticky-height="40" src="../../img/logo.png">\
             </a>\
         </h1>\
         <!-- Non Logged In Menu-->\

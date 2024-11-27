@@ -25,6 +25,21 @@ app.get('/api/getFurnitureByCat', function (req, res) {
         });
 });
 
+// ju : get furniture by furniture name
+app.get('/api/getFurnitureByName', function (req, res) {
+    console.log("im julene")
+    var name = req.query.name;
+    var countryId = req.query.countryId;
+    furniture.getFurnitureByName(countryId, name)
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).send("Failed to get furniture by name");
+        });
+});
+
 app.get('/api/getFurnitureBySku', function (req, res) {
     var sku = req.query.sku;
     var countryId = req.query.countryId;

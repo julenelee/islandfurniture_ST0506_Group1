@@ -67,30 +67,35 @@
         align-items: center;
 
     }
+
+    img {
+        max-width: none;
+        width: auto;
+        height: auto;
+    }
 </style>
 
 <body>
     <script>
-        // ju : studyroom used furnitures
-        // 1. STILIG (black table lamp)
-        // 2. RISET (white table lamp)
-        // 3. silveran (shampoo bottle)
-        // 4. ragrund (hooks)
-        // 5. hensvik (floor container)
-        // 6. ivar (table container)
+        // ju : bedroom used furnitures
+        // 1. TORNLIDEN (coffee  table)
+        // 2. NORRASEN (shelf)
+        // 3. EKENAS (arm chair)
+        // 4. RISET (table lamp)
+        // 5. HEMNES (bed)
+        // 6. BOSNAS (sofa)
 
-        document.addEventListener('DOMContentLoaded', function () {
-            var studyroomMapTxt = '<map name="studyroomMap">'
-                + '<area  alt="" title="basin" shape="rect" coords="500,400,650,340" style="outline:none; cursor: pointer" onclick="showPopup(\'talleviken\')\" target="_self" />'
-                + '<area  alt="" title="pipe" shape="rect" coords="560, 450, 585, 410" style="outline:none; cursor: pointer" onclick="showPopup(\'lillangen\')\" target="_self" />'
-                + '<area  alt="" title="shampoo bottle" shape="rect" coords="385,230,412,302" style="outline:none; cursor: pointer" onclick="showPopup(\'silveran\')\" target="_self" />'
-                + '<area  alt="" title="hooks" shape="rect" coords="360, 190, 435, 230" style="outline:none; cursor: pointer" onclick="showPopup(\'ragrund\')\" target="_self" />'
-                + '<area  alt="" title="floor container" shape="rect" coords="295, 550, 380, 450" style="outline:none; cursor: pointer" onclick="showPopup(\'hensvik\')\" target="_self" />'
-                + '<area  alt="" title="table container" shape="rect" coords="290, 400, 390, 340" style="outline:none; cursor: pointer" onclick="showPopup(\'ivar\')\" target="_self" />'
-                + '<area shape="rect" coords="1048,766,1050,768" alt="Image Map" style="outline:none;" title="Image Map" href="http://www.image-maps.com/index.php?aff=mapped_users_0" />'
-                + '</map>'
-            document.getElementById('mapOfStudyroom').innerHTML = studyroomMapTxt;
-        }, false);
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     var bedroomMapTxt = '<map name="bedroomMap">'
+        //         + '<area  alt="" title="dressing table" shape="rect" coords="360,270,350,400    " style="outline:none; cursor: pointer" onclick="showPopup(\'VITTSJO\')\" target="_self" />'
+        //         + '<area  alt="" title="shelf" shape="rect" coords="560, 450, 585, 410" style="outline:none; cursor: pointer" onclick="showPopup(\'NORRASEN\')\" target="_self" />'
+        //         + '<area  alt="" title="arm chair" shape="rect" coords="0,335,210,540" style="outline:none; cursor: pointer" onclick="showPopup(\'EKENAS\')\" target="_self" />'
+        //         + '<area  alt="" title="table lamp" shape="rect" coords="360, 190, 435, 230" style="outline:none; cursor: pointer" onclick="showPopup(\'RISET\')\" target="_self" />'
+        //         + '<area  alt="" title="bed" shape="rect" coords="295, 550, 380, 450" style="outline:none; cursor: pointer" onclick="showPopup(\'HEMNES\')\" target="_self" />'
+        //         + '<area shape="rect" coords="1048,766,1050,768" alt="Image Map" style="outline:none;" title="Image Map" href="http://www.image-maps.com/index.php?aff=mapped_users_0" />'
+        //         + '</map>'
+        //     document.getElementById('mapOfBedroom').innerHTML = bedroomMapTxt;
+        // }, false);
 
 
         // ju : handling popup box
@@ -147,9 +152,43 @@
                     <div class="featured-box featured-box-secondary default info-content">
                         <div class="box-content">
                             <h4>Study Room</h4>
-                            <img src="../../../img/showroom-studyroom.jpg" alt="Study Room Map" usemap="#studyroomMap"
-                                width="1050" height="auto" />
-                            <div id="mapOfStudyroom"></div>
+                            <div style="position: relative;">
+                                <!-- Image -->
+                                <img src="../../../img/showroom-studyroom.jpg" alt="Studyroom" style="width: 100%;" />
+
+                                <!-- Laptop Table -->
+                                <div style="position: absolute; top: 52.3%; left: 40.5%; width: 27.8%; height: 5.8%; cursor: pointer;"
+                                    onclick="showPopup('STADJAN')">
+                                </div>
+
+                                <!-- Bookshelf -->
+                                <div style="position: absolute; top: 22%; left: 68%; width: 25%; height: 60%; cursor: pointer;"
+                                    onclick="showPopup('NORRASEN')">
+                                </div>
+
+                                <!-- BYLLAM -->
+                                <div style="position: absolute; top: 53%; left: 8%; width: 30%; height: 25%; cursor: pointer;"
+                                    onclick="showPopup('BYLLAM')">
+                                </div>
+
+                                <!-- Lamp -->
+                                <div style="position: absolute; top: 35%; left: 8%; width: 25%; height: 20%; cursor: pointer;"
+                                    onclick="showPopup('RISET')">
+                                </div>
+
+                                <!-- Wall Light -->
+                                <div style="position: absolute; top: 48%; left: 20%; width: 30%; height: 25%; cursor: pointer;"
+                                    onclick="showPopup('RYSSBY')">
+                                </div>
+
+
+                                <!-- Black Basket -->
+                                <div style="position: absolute; top: 65%; left: 25%; width: 20%; height: 15%; cursor: pointer;"
+                                    onclick="showPopup('EKBY')">
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
                 </div>

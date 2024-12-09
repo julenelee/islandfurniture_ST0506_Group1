@@ -11,9 +11,9 @@ var storage = multer.diskStorage({
     }
 });
 var upload = multer({ storage: storage });
-var furniture = require('../model/promotionModel.js');
+var promotionModel = require('../model/promotionModel.js');
 app.get('/api/getAllPromotions', function (req, res) {
-    furniture.getAllPromotions()
+    promotionModel.getAllPromotions()
         .then((result) => {
             res.send(result);
         })
@@ -22,5 +22,14 @@ app.get('/api/getAllPromotions', function (req, res) {
             res.status(500).send("Failed to get promotions");
         });
 });
+
+app.get(`/api/getPromotionDetails`, (req, res) => {
+    const promotionId = req.query.id;
+
+    promotionModel.getPromotionById(promotionId)
+        .then(data => res.json(data))
+        .catch(err => res.status(500).send('Failed to fetch promotion details'));
+});
+
 
 module.exports = app;

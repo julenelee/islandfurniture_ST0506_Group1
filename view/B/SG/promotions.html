@@ -1,0 +1,105 @@
+<script src="../checkCountry.js"></script>
+<html>
+<script src="../../header.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promotions</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+    }
+
+    .promotion-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 20px;
+        flex-wrap: wrap;
+    }
+
+    .promotion-item {
+        width: 45%;
+        margin: 10px;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .promotion-item img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .promotion-item img:hover {
+        transform: scale(1.05);
+    }
+
+    .promotion-item a {
+        display: block;
+        text-decoration: none;
+    }
+</style>
+
+<script>
+    // to retrieve the promotion image
+
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log("im here")
+        fetch(new Request('/api/getAllPromotions',
+            {
+                method: 'GET'
+            })).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                var htmlTxt = '';
+
+                data.forEach(function (promotion) {
+                    console.log(promotion)
+                    const fullURLPath = promotion.IMAGEURL;
+                    const relativePath = fullURLPath.replace("/IS3102_Project-war/", ""); // cuz got this extra path included in the db
+
+                    //generate html to view promotion
+                    htmlTxt += '\
+                                <div class="promotion-item">\
+                                    <a href="promotionDetails.html?id=' + promotion.ID + '">\
+                                        <img src="../../' + relativePath + '" alt="'+ promotion.DESCRIPTION +'">\
+                                    </a>\
+                                </div>';
+                                
+                });
+
+                document.getElementById("promoContainer").innerHTML = htmlTxt;
+
+            }).catch(function (error) {
+                console.log(error);
+            });
+    }, false);
+</script>
+
+<body>
+    <script src="menu2.js"></script>
+
+    <div class="promotion-container" id="promoContainer">
+        <!-- get from db -->
+        <div class="promotion-item">
+            <a href="promotion1.html">
+                <img src="../../img/promotions/F_BM_212014-11-24.jpg" alt="50% Off Living Room Furniture">
+            </a>
+        </div>
+
+        <!-- Promotion 2 -->
+        <div class="promotion-item">
+            <a href="promotion2.html">
+                <img src="../../img/promotions/F_SC_402014-12-06.jpg" alt="Buy One Get One Free Dining Chairs">
+            </a>
+        </div>
+    </div>
+
+    <script src="../footer.js"></script>
+</body>
+
+</html>

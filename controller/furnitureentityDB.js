@@ -27,7 +27,6 @@ app.get('/api/getFurnitureByCat', function (req, res) {
 
 // ju : get furniture by furniture name
 app.get('/api/getFurnitureByName', function (req, res) {
-    console.log("im julene")
     var name = req.query.name;
     var countryId = req.query.countryId;
     furniture.getFurnitureByName(countryId, name)

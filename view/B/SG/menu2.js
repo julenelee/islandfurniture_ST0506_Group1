@@ -87,6 +87,9 @@ document.write('\
                     <li>\
                         <a href="/B/' + countryPrefix + '/virtualStore.html">Virtual Store</a>\
                     </li>\
+                    <li>\
+                        <a href="/B/' + countryPrefix + '/promotions.html">Promotions</a>\
+                    </li>\
                     <li class="dropdown">\
                         <a class="dropdown-toggle" href="#">\
                             All Departments<i class="icon icon-angle-down"></i>\

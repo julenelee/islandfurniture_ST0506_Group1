@@ -73,6 +73,32 @@
         width: auto;
         height: auto;
     }
+
+    .go-back-button {
+        display: inline-block;
+        margin-bottom: 10px;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #d9232d;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .go-back-button {
+        display: block;
+        float: left;
+        
+    }
+
+    .go-back-button:hover,
+    .buy-now-btn:hover {
+        background-color: #a81c22;
+    }
 </style>
 
 <body>
@@ -123,6 +149,10 @@
                     document.getElementById("popupWidth").innerHTML = furniture.width;
                     document.getElementById("popupPrice").innerHTML = furniture.price;
 
+                    // view details
+                    var viewDetailsButton = '<button class="btn btn-primary btn-block" onclick="window.location.href=\'http://localhost:8081/B/SG/furnitureProductDetails.html?sku=' + furniture.sku + '\'">View Details</button>';
+                    document.getElementById("popupViewDetails").innerHTML = viewDetailsButton;
+                    
                     document.getElementById("popupBox").style.display = "flex";
 
                 }).catch(function (error) {
@@ -148,6 +178,7 @@
         <div class="container-fluid">
             <div class="row featured-box login">
                 <!-- Virtual Store Map -->
+                <button class="go-back-button" onclick="window.location.href='../virtualStore.html'">← Go back to virtual store</button>
                 <div class="col-md-12">
                     <div class="featured-box featured-box-secondary default info-content">
                         <div class="box-content">
@@ -203,6 +234,7 @@
                 <li><strong>Length:</strong> <span id="popupLength"></span></li>
                 <li><strong>Width:</strong> <span id="popupWidth"></span></li>
                 <li><strong>Price: $</strong> <span id="popupPrice"></span></li>
+                <li><span id="popupViewDetails"></span></li>
             </ul>
         </div>
     </div>

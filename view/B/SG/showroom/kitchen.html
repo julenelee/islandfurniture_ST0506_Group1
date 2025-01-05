@@ -73,6 +73,32 @@
         width: auto;
         height: auto;
     }
+
+    .go-back-button {
+        display: inline-block;
+        margin-bottom: 10px;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #d9232d;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .go-back-button {
+        display: block;
+        float: left;
+        
+    }
+
+    .go-back-button:hover,
+    .buy-now-btn:hover {
+        background-color: #a81c22;
+    }
 </style>
 
 <body>
@@ -111,6 +137,10 @@
                     document.getElementById("popupWidth").innerHTML = furniture.width;
                     document.getElementById("popupPrice").innerHTML = furniture.price;
 
+                    // view details
+                    var viewDetailsButton = '<button class="btn btn-primary btn-block" onclick="window.location.href=\'http://localhost:8081/B/SG/furnitureProductDetails.html?sku=' + furniture.sku + '\'">View Details</button>';
+                    document.getElementById("popupViewDetails").innerHTML = viewDetailsButton;
+
                     document.getElementById("popupBox").style.display = "flex";
 
                 }).catch(function (error) {
@@ -136,6 +166,7 @@
         <div class="container-fluid">
             <div class="row featured-box login">
                 <!-- Virtual Store Map -->
+                <button class="go-back-button" onclick="window.location.href='../virtualStore.html'">← Go back to virtual store</button>
                 <div class="col-md-12">
                     <div class="featured-box featured-box-secondary default info-content">
                         <div class="box-content">
@@ -144,32 +175,25 @@
                                 <!-- Image -->
                                 <img src="../../../img/showroom-kitchen.jpg" alt="Bedroom" style="width: 100%;" />
 
-                                <!-- Dressing Table -->
-                                <div style="position: absolute; top: 47.1%; left: 67.7%; width: 10%; height: 2%; cursor: pointer;"
-                                    onclick="showPopup('VITTSJO')">
-                                </div>
-
                                 <!-- Shelf -->
-                                <div style="position: absolute; top: 32.3%; left: 33.5%; width: 5.8%; height: 13.4%; cursor: pointer;"
-                                    onclick="showPopup('NORRASEN')">
+                                <div style="position: absolute; top: 53%; left: 72%; width: 28%; height: 21%; cursor: pointer;"
+                                    onclick="showPopup('GLASHOLM')">
                                 </div>
-                                <!-- Arm Chair -->
-                                <div style="position: absolute; top: 57.62%; left: 0%; width: 19.37%; height: 31.25%; cursor: pointer;"
-                                    onclick="showPopup('EKENAS')">
-                                </div>
-
-                                <!-- Table Lamp -->
-                                <div style="position: absolute; top: 45.7%; left: 35.7%; width: 4.5%; height: 5.8%; cursor: pointer;"
-                                    onclick="showPopup('RISET')">
-                                </div>
-                                <!-- Bed -->
-                                <div style="position: absolute; top: 47.2%; left: 42.4%; width: 21.6%; height: 22.6%; cursor: pointer;"
-                                    onclick="showPopup('HEMNES')">
+                                <!-- Chair -->
+                                <div style="position: absolute; top: 58%; left: 36%; width: 13%; height: 22.6%; cursor: pointer;"
+                                    onclick="showPopup('KARSTAD')">
                                 </div>
 
-                                <div style="position: absolute; top: 55.9%; left: 12.5%; width: 18.8%; height: 6.7%; cursor: pointer;"
-                                    onclick="showPopup('BOSNAS')">
+                                <!-- Left side Basket -->
+                                <div style="position: absolute; top: 74%; left: 73%; width: 11%; height: 18%; cursor: pointer;"
+                                    onclick="showPopup('ANTONIUS')">
                                 </div>
+
+                                <!-- Left side Basket -->
+                                <div style="position: absolute; top: 41%; left: 19%; width: 9%; height: 40%; cursor: pointer;"
+                                    onclick="showPopup('ANTONIUS')">
+                                </div>
+
 
                             </div>
 
@@ -191,6 +215,7 @@
                 <li><strong>Length:</strong> <span id="popupLength"></span></li>
                 <li><strong>Width:</strong> <span id="popupWidth"></span></li>
                 <li><strong>Price: $</strong> <span id="popupPrice"></span></li>
+                <li><span id="popupViewDetails"></span></li>
             </ul>
         </div>
     </div>

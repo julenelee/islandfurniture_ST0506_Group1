@@ -73,6 +73,32 @@
         width: auto;
         height: auto;
     }
+
+    .go-back-button {
+        display: inline-block;
+        margin-bottom: 10px;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #d9232d;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .go-back-button {
+        display: block;
+        float: left;
+        
+    }
+
+    .go-back-button:hover,
+    .buy-now-btn:hover {
+        background-color: #a81c22;
+    }
 </style>
 
 <body>
@@ -123,6 +149,10 @@
                     document.getElementById("popupWidth").innerHTML = furniture.width;
                     document.getElementById("popupPrice").innerHTML = furniture.price;
 
+                    // view details
+                    var viewDetailsButton = '<button class="btn btn-primary btn-block" onclick="window.location.href=\'http://localhost:8081/B/SG/furnitureProductDetails.html?sku=' + furniture.sku + '\'">View Details</button>';
+                    document.getElementById("popupViewDetails").innerHTML = viewDetailsButton;
+
                     document.getElementById("popupBox").style.display = "flex";
 
                 }).catch(function (error) {
@@ -148,6 +178,7 @@
         <div class="container-fluid">
             <div class="row featured-box login">
                 <!-- Virtual Store Map -->
+                <button class="go-back-button" onclick="window.location.href='../virtualStore.html'">← Go back to virtual store</button>
                 <div class="col-md-12">
                     <div class="featured-box featured-box-secondary default info-content">
                         <div class="box-content">
@@ -167,23 +198,18 @@
                                 </div>
 
                                 <!-- BYLLAM -->
-                                <div style="position: absolute; top: 53%; left: 8%; width: 30%; height: 25%; cursor: pointer;"
+                                <div style="position: absolute; top: 53%; left: 8%; width: 25%; height: 11%; cursor: pointer;"
                                     onclick="showPopup('BYLLAM')">
                                 </div>
 
-                                <!-- Lamp -->
-                                <div style="position: absolute; top: 35%; left: 8%; width: 25%; height: 20%; cursor: pointer;"
-                                    onclick="showPopup('RISET')">
+                                <!-- RISET -->
+                                <div
+                                style="position: absolute; top: 38%; left: 26%; width: 5%; height: 7%; cursor: pointer;"
+                                onclick="showPopup('RISET')">
                                 </div>
-
-                                <!-- Wall Light -->
-                                <div style="position: absolute; top: 48%; left: 20%; width: 30%; height: 25%; cursor: pointer;"
-                                    onclick="showPopup('RYSSBY')">
-                                </div>
-
 
                                 <!-- Black Basket -->
-                                <div style="position: absolute; top: 65%; left: 25%; width: 20%; height: 15%; cursor: pointer;"
+                                <div style="position: absolute; top: 65%; left: 24%; width: 9%; height: 15%; cursor: pointer;"
                                     onclick="showPopup('EKBY')">
                                 </div>
 
@@ -207,6 +233,7 @@
                 <li><strong>Length:</strong> <span id="popupLength"></span></li>
                 <li><strong>Width:</strong> <span id="popupWidth"></span></li>
                 <li><strong>Price: $</strong> <span id="popupPrice"></span></li>
+                <li><span id="popupViewDetails"></span></li>
             </ul>
         </div>
     </div>

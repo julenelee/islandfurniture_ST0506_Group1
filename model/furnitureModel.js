@@ -119,7 +119,7 @@ var furnitureDB = {
 
     // ju : get furniture by name
     getFurnitureByName: function (countryId, name) {
-        console.log("im ju")
+        console.log("im julennn")
         return new Promise((resolve, reject) => {
             var conn = db.getConnection();
             conn.connect(function (err) {
@@ -130,7 +130,7 @@ var furnitureDB = {
                 }
                 else {
                     if (countryId == null || countryId == '') {
-                        var sql = 'SELECT i.ID as id, i.NAME as name, f.IMAGEURL as imageURL, i.SKU as sku, i.DESCRIPTION as description,'
+                        var sql = 'SELECT i.ID as id, i.NAME as name, f.IMAGEUL as imageURL, i.SKU as sku, i.DESCRIPTION as description,'
                             + ' i.TYPE as type, i._LENGTH as length, i.WIDTH as width, i.HEIGHT as height, i.CATEGORY as category'
                             + ' FROM itementity i, furnitureentity f where i.ID=f.ID and i.ISDELETED=FALSE and i.NAME=?;';
                         conn.query(sql, [name], function (err, result) {
@@ -174,13 +174,13 @@ var furnitureDB = {
                                     fur.id = result[i].id;
                                     fur.name = result[i].name;
                                     fur.imageURL = result[i].imageURL;
-                                    //fur.sku = result[i].sku;
+                                    fur.sku = result[i].sku;
                                     //fur.description = result[i].description;
                                     //fur.type = result[i].type;
                                     fur.length = result[i].length;
                                     fur.width = result[i].width;
                                     fur.height = result[i].height;
-                                    //fur.category = result[i].category;
+                                    fur.category = result[i].category;
                                     fur.price = result[i].price;
                                     furList.push(fur);
                                 }

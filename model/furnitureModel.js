@@ -459,6 +459,42 @@ var furnitureDB = {
                 }
             });
         });
+    },
+
+    getItemQuantity: function (sku) {
+        console.log("Fetching item volume for SKU:", sku);
+        return new Promise((resolve, reject) => {
+            var conn = db.getConnection();
+            conn.connect(function (err) {
+                if (err) {
+                    console.log(err);
+                    conn.end();
+                    return reject(err);
+                } else {
+                    var sql = `
+                        SELECT volume AS remainingQty
+                        FROM itementity
+                        WHERE sku = ?;
+                    `;
+                    conn.query(sql, [sku], function (err, result) {
+                        if (err) {
+                            console.log(err);
+                            conn.end();
+                            return reject(err);
+                        } else {
+                            conn.end();
+                            if (result.length === 0) {
+                                return resolve({ remainingQty: 0 }); // Default to 0 if no match
+                            }
+                            return resolve(result[0]); // Return the row with remainingQty
+                        }
+                    });
+                }
+            });
+        });
     }
+    
+    
+
 };
 module.exports = furnitureDB

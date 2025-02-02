@@ -131,4 +131,26 @@ app.post('/api/updateFurniture', upload.single('imgfile'), function (req, res) {
         });
 });
 
+app.get('/api/getItemQuantity', function (req, res) {
+    var sku = req.query.sku;
+
+    if (!sku) {
+        return res.status(400).send("SKU is required");
+    }
+
+    var furniture = require('../model/furnitureModel.js');
+    furniture.getItemQuantity(sku)
+        .then((result) => {
+            res.send(result); // Send the remaining quantity back to the frontend
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send("Failed to get item quantity");
+        });
+});
+
+
+
+
+
 module.exports = app;

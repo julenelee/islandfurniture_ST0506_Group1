@@ -20,10 +20,13 @@
                 }).then(function (product) {
                     //set retail product details
                     document.getElementById("productImg").setAttribute('src', product.imageURL);
+                    // Add the description
+                    document.getElementById("productDesc").textContent = product.description;
 
                     document.getElementById("productCategory").innerHTML = product.category;
                     document.getElementById("productCategory").setAttribute('href', '/B/' + countryPrefix
                         + '/retailProductsCategory.html?cat=' + encodeURIComponent(product.category));
+                        document.getElementById("productDesc").textContent  = product.description; // Added line to set the description
 
                     var selectOptions = '<option></option>';
                     var storeID = currentUrl.searchParams.get("storeID");
@@ -53,27 +56,33 @@
                     console.log(error);
                 });
 
-            function CheckItemAvail() {
-                var storeId = document.getElementById("storeID").value;
-                if(storeId != null && storeId != '') {
-                    fetch(new Request('/api/getItemQuantity?sku=' + sku + '&storeId=' + storeId,
-                    {
-                        method: 'GET'
-                    })).then(function (response) {
-                        return response.json();
-                    }).then(function (data) {
-                        var quantity = data[0].sum;
-                        if(quantity == null || quantity == '') {
-                            quantity = 0;
-                        }
-                        //refresh page with item's quantity in the query parameter to display to the user
-                        var url = window.location.origin + window.location.pathname;
-                        window.location.href = url + '?sku=' + sku + '&itemQty=' + quantity + '&storeID=' + storeId;
-                    }).catch(function(error) {
-                        console.log(error);
-                    });
+                function CheckItemAvail() {
+                    var storeId = document.getElementById("storeID").value;
+                    if (storeId != null && storeId != '') {
+                        fetch(new Request('/api/getRetailItemQuantity?sku=' + sku + '&storeId=' + storeId,
+                        {
+                            method: 'GET'
+                        })).then(function (response) {
+                            return response.json();
+                        }).then(function (data) {
+                            var quantity = data.remainingQty || 0; // Use the value or default to 0
+                            var status = quantity > 0 ? 'Available' : 'Unavailable';
+
+                            // Update the quantity display
+                            document.getElementById("quantityDiv").innerHTML = `
+                                <div class="col-md-6">
+                                    Status: ${status}<br/>
+                                    Remaining Qty: ${quantity}
+                                </div>`;
+                        }).catch(function (error) {
+                            console.error("Error fetching item quantity:", error);
+                            alert("Failed to check availability.");
+                        });
+                    } else {
+                        alert("Please select a store to check availability.");
+                    }
                 }
-            }
+
         </script>
         <div class="body">
             <script src="menu2.js"></script>

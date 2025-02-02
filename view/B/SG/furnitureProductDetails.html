@@ -20,6 +20,8 @@
                 }).then(function (furniture) {
                     //set furniture details
                     document.getElementById("imgFurniture").setAttribute('src', furniture.imageURL);
+                    // Add the description
+                    document.getElementById("description").textContent = furniture.description;
                 
                     if(memberEmail != null && memberEmail != '') {
                         document.getElementById("addToCartBtn").innerHTML = '<button class="btn btn-primary" onclick="addToCart(\''
@@ -129,26 +131,35 @@
             }
 
             function CheckItemAvail() {
-                var storeId = document.getElementById("storeID").value;
-                if(storeId != null && storeId != '') {
-                    fetch(new Request('/api/getItemQuantity?sku=' + sku + '&storeId=' + storeId,
-                    {
-                        method: 'GET'
-                    })).then(function (response) {
-                        return response.json();
-                    }).then(function (data) {
-                        var quantity = data[0].sum;
-                        if(quantity == null || quantity == '') {
-                            quantity = 0;
-                        }
-                        //refresh page with item's quantity in the query parameter to display to the user
-                        var url = window.location.origin + window.location.pathname;
-                        window.location.href = url + '?sku=' + sku + '&itemQty=' + quantity + '&storeID=' + storeId;
-                    }).catch(function(error) {
-                        console.log(error);
-                    });
+                var storeId = document.getElementById("storeID").value; // Get store ID
+                var sku = new URLSearchParams(window.location.search).get('sku'); // Get SKU from URL
+
+                if (storeId != null && storeId != "") {
+                    fetch(`/api/getItemQuantity?sku=${sku}`)
+                        .then((response) => response.json())
+                        .then((data) => {
+                            console.log("API Response:", data);
+                            var quantity = data.remainingQty || 0; // Get remaining quantity
+                            var status = quantity > 0 ? "Available" : "Unavailable";
+
+                            // Update the quantity display on the page
+                            document.getElementById("quantityDiv").innerHTML = `
+                                <div class="col-md-6">
+                                    Status: ${status}<br/>
+                                    Remaining Qty: ${quantity}
+                                </div>
+                            `;
+                        })
+                        .catch((error) => {
+                            console.error("Error fetching item quantity:", error);
+                            alert("Failed to check availability.");
+                        });
+                } else {
+                    alert("Please select a store to check availability.");
                 }
             }
+
+
         </script>
         <div class="body">
             <script src="menu2.js"></script>

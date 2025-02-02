@@ -289,6 +289,8 @@
                         }).then(function (data) {
                             //update member's info in the session storage
                             sessionStorage.setItem("member", JSON.stringify(data));
+                            console.log("done")
+                            alert("Your Password has been updated successfully!");
                             var url = window.location.origin + window.location.pathname;
                             window.location.href = url + '#changePassword?goodMsg=Successfully Updated!';
                         }).catch(function (error) {
